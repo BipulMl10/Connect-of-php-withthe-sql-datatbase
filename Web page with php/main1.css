@@ -1,0 +1,9 @@
+.middle_line
+{
+    position: absolute;
+    width: 200px;
+    height: 2px;
+    background-color: green;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}

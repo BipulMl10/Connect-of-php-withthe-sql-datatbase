@@ -1,0 +1,117 @@
+===============================================================================================
+										Assignment 5 SQL script
+===============================================================================================
+1).DROP DATABASE IF EXISTS `info_club`;
+2).DROP USER 'A340User'@'localhost';
+
+_______________________________________________________________________________________________
+
+1)CREATE DATABASE IF NOT EXISTS info_club;
+2)CREATE USER 'A340User'@'localhost' IDENTIFIED BY 'Pass123Word';
+3)GRANT
+	SELECT ,
+	INSERT ,
+	UPDATE ,
+	DELETE ,
+	CREATE ,
+	FILE
+	ON
+	 *.*
+	TO
+	 'A340User'@'localhost' IDENTIFIED BY 'Pass123Word'
+	WITH
+	 MAX_QUERIES_PER_HOUR 0
+	 MAX_CONNECTIONS_PER_HOUR 0
+	 MAX_UPDATES_PER_HOUR 0
+	 MAX_USER_CONNECTIONS 0 ;
+4).USE info_club;
+5).GRANT
+	 SELECT , INSERT , UPDATE , DELETE , CREATE, ALTER
+	ON
+	 `info\_club` . *
+	TO
+	 'A340User'@'localhost';
+
+_______________________________________________________________________________________________
+--	 
+--Member Table
+--
+6).CREATE TABLE IF NOT EXISTS `member` (
+	 `Email` varchar(128) NOT NULL,
+	 `FirstName` varchar(32) DEFAULT NULL,
+	 `LastName` varchar(32) DEFAULT NULL,
+	 `Gender` varchar(16) NOT NULL,
+	 `MemberSince` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	 PRIMARY KEY (`Email`)
+	) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+--
+-- Dumping data for table `member`
+--
+
+7)INSERT INTO `member` (`Email`, `FirstName`, `LastName`, `Gender`, `MemberSince`) VALUES
+	('madams@yahoo.com', 'Mary', 'Adams', 'Female', '2013-04-14 16:18:59'),
+	('tjohnson@gmail.com', 'Tom', 'Johnson', 'Male', '2013-04-14 00:00:00');
+
+_______________________________________________________________________________________________
+--	 
+--interest_type
+--
+8)CREATE TABLE IF NOT EXISTS `interest_type` (
+	 `InterestID` INT NOT NULL,
+	 `InterestDescription` varchar(128) NOT NULL,
+	 PRIMARY KEY (`InterestID`)
+	) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `interest_type`
+--	
+9)INSERT INTO `interest_type` (`InterestID`, `InterestDescription`) VALUES
+	(1, 'Pizza Party'),
+	(2, 'Joining Study Groups'),
+	(3, 'Visiting Employer Sites'),
+	(4, 'Participating in Programming Competitions'),
+	(5, 'Building Games'),
+	(6, 'Becoming an Officer of the Club');
+	
+_______________________________________________________________________________________________
+--	 
+--member_interests
+--
+10) CREATE TABLE IF NOT EXISTS `member_interests` (
+	 `Email` varchar(128) NOT NULL,
+	 `InterestID` INT NOT NULL,
+	 PRIMARY KEY (`Email`, `InterestID`)
+	) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `member_interests`
+--	
+
+11) INSERT INTO `member_interests` (`Email`, `InterestID`) VALUES
+	('tjohnson@gmail.com', 1),
+	('tjohnson@gmail.com', 2),
+	('madams@yahoo.com', 1),
+	('madams@yahoo.com', 2),
+	('madams@yahoo.com', 3);
+_______________________________________________________________________________________________
+--
+-- Connect the tables together via foreign keys
+--
+
+1) ALTER TABLE `member_interests` ADD FOREIGN KEY ( `InterestID` ) REFERENCES
+	`info_club`.`interest_type` (
+	`InterestID`
+	) ON UPDATE CASCADE ;
+
+2).ALTER TABLE `member_interests` ADD FOREIGN KEY ( `Email` ) REFERENCES
+	`info_club`.`member` (
+	`Email`
+	) ON UPDATE CASCADE ;
+
+_______________________________________________________________________________________________
+
+
+
+
+
+

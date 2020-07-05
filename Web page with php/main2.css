@@ -1,0 +1,39 @@
+table
+{
+    font-size: 12px;
+    border-width: 20px;
+    height: 100%;
+    width: 100%;
+}
+th
+{
+    text-align: center;
+    font-size: 15px;
+    background-color: rgb(71, 169, 202);
+    align-items: center;
+}
+table, th, td {
+    border: 1px solid black;
+  }
+tr:hover
+{
+    box-shadow: 3px 2px 2px;
+    background-color: #72FFFF;
+}
+
+
+#text_data
+{
+    padding: 1px;
+    margin-top:30px;
+    width: 60%;
+    position: absolute;
+    border-style: outset;
+    border-width: 3px;
+    border-color: dimgray;  
+    margin-left: 130px;
+}
+#text_data:hover
+{
+    box-shadow: 1px 1px 2px;
+}
